@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,11 +48,17 @@ public class TaipeiWaterSpot extends HttpServlet {
 		}
 		PrintWriter out = response.getWriter();
 		//out.append(sb);
+		System.out.println(sb.toString());
 		JSONObject object = new JSONObject(sb.toString());
+		request.setAttribute("JSONObject", object);
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+		rd.forward(request, response);
+//		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		
+		/*
 		JSONObject obj = object.getJSONObject("result");
 		JSONArray spotsArray = obj.getJSONArray("results");
-		//每月對照使用、直飲臺編號、轄區分處、市別、場所別、場所次分類、場所名稱、地址、行政區、管理單位、連絡電話、場所開放時間、設置地點、經度、緯度、狀態、狀態異動日期時間、最近採樣日期時間、大腸桿菌數、水質及維護資訊網址、直飲台照片
-		//spotsArray.forEach(arg0);
+		
 		  out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 		  out.println("<BODY>_id  地址<BR>");
 		  
@@ -63,7 +70,7 @@ public class TaipeiWaterSpot extends HttpServlet {
 		}
 		out.println("</BODY></HTML>");
 		
-		
+		**/
 		
 	}
 
